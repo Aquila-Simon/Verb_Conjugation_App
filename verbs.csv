@@ -1,0 +1,17 @@
+verb,verb_type
+食べる,ichidan
+見る,ichidan
+飲む,godan
+書く,godan
+待つ,godan
+帰る,godan
+行く,godan
+話す,godan
+泳ぐ,godan
+する,irregular
+来る,irregular
+
+話す,
+泳ぐ,banana
+,ichidan
+   見る   ,   ichidan   
