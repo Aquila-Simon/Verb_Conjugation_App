@@ -1,6 +1,7 @@
 import tkinter as tkin
 import random
 from conjugation import conjugate_て_form
+from conjugation import conjugate_ます_form
 from csv_loader import load_verbs
 
 # Creating a Dictionary to simplify tags when used in Functions
@@ -10,24 +11,23 @@ test_state = {
     "skipped_count": 0,
     "mistakes": [],
     "verbs": [],
+    "conjugation_types": ["て", "ます"],
+    "conjugation_type": "",
     "verb": "",
     "verb_type": "",
     "correct_answer": "",
 }
 
-# Initialize Test upon Boot as far as variables and lists
-test_state["current_question"] = 0
-test_state["score"] = 0
-test_state["mistakes"] = []
 
-# Creates the very first question
-test_state["verbs"], test_state["skipped_count"] = load_verbs()
-random.shuffle(test_state["verbs"])
-unpacked_verb = test_state["verbs"][test_state["current_question"]]
-test_state["verb"], test_state["verb_type"] = unpacked_verb
-test_state["correct_answer"] = conjugate_て_form(
-    test_state["verb"], test_state["verb_type"]
-)
+def generate_correct_answer():
+    if test_state["conjugation_type"] == "て":
+        test_state["correct_answer"] = conjugate_て_form(
+            test_state["verb"], test_state["verb_type"]
+        )
+    if test_state["conjugation_type"] == "ます":
+        test_state["correct_answer"] = conjugate_ます_form(
+            test_state["verb"], test_state["verb_type"]
+        )
 
 
 def check_answer(event=None):  # Function for Receiving the answer and verifying it
@@ -58,11 +58,11 @@ def check_answer(event=None):  # Function for Receiving the answer and verifying
     if test_state["current_question"] < len(test_state["verbs"]):
         unpacked_verb = test_state["verbs"][test_state["current_question"]]
         test_state["verb"], test_state["verb_type"] = unpacked_verb
-        test_state["correct_answer"] = conjugate_て_form(
-            test_state["verb"], test_state["verb_type"]
-        )
+        generate_correct_answer()
         question_label.config(text=f"Question #{test_state['current_question'] + 1}")
-        question_bar.config(text=f"What is the て-form of {test_state['verb']}?")
+        question_bar.config(
+            text=f"What is the {test_state['conjugation_type']}-form of {test_state['verb']}?"
+        )
         answer_entry.delete(0, tkin.END)
     else:
         review_text = ""
@@ -93,19 +93,20 @@ def restart_test(
     test_state["score"] = 0
     test_state["mistakes"].clear()
     test_state["verbs"], test_state["skipped_count"] = load_verbs()
+    test_state["conjugation_type"] = random.choice(test_state["conjugation_types"])
     random.shuffle(test_state["verbs"])
     unpacked_verb = test_state["verbs"][test_state["current_question"]]
     test_state["verb"], test_state["verb_type"] = unpacked_verb
-    test_state["correct_answer"] = conjugate_て_form(
-        test_state["verb"], test_state["verb_type"]
-    )
+    generate_correct_answer()
 
     score_label.config(
         text=f"Score: {test_state['score']}/{len(test_state['verbs'])}",
         font=("Arial", 16, "bold"),
     )
     question_label.config(text=f"Question #{test_state['current_question'] + 1}")
-    question_bar.config(text=f"What is the て-form of {test_state['verb']}?")
+    question_bar.config(
+        text=f"What is the {test_state['conjugation_type']}-form of {test_state['verb']}?"
+    )
     answer_label.config(text="")
     finish_label.config(text="")
     mistake_text.config(state="normal")
@@ -119,6 +120,19 @@ def restart_test(
     submit_bt.pack(pady=5)
     answer_entry.config(state="normal")
 
+
+# Initialize Test upon Boot as far as variables and lists
+test_state["current_question"] = 0
+test_state["score"] = 0
+test_state["mistakes"] = []
+
+# Creates the very first question
+test_state["verbs"], test_state["skipped_count"] = load_verbs()
+test_state["conjugation_type"] = random.choice(test_state["conjugation_types"])
+random.shuffle(test_state["verbs"])
+unpacked_verb = test_state["verbs"][test_state["current_question"]]
+test_state["verb"], test_state["verb_type"] = unpacked_verb
+generate_correct_answer()
 
 # Main Screen Setup
 root = tkin.Tk()
@@ -139,7 +153,7 @@ question_label.config(text=f"Question #{test_state['current_question'] + 1}")
 # Sets up the Actual Question Display
 question_bar = tkin.Label(
     root,
-    text=f"What is the て-form of {test_state['verb']}?",
+    text=f"What is the {test_state['conjugation_type']}-form of {test_state['verb']}?",
     font=("Arial", 20, "bold"),
 )
 question_bar.pack(
