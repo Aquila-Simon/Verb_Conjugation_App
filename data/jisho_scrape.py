@@ -1,12 +1,20 @@
-import requests, json
+import json
 from pathlib import Path
+
+import requests
 
 # word = input("Please input a Japanese word: ")
 
 url = "https://jisho.org/api/v1/search/words"
 params = {"keyword": "#jlpt-n5 #verb"}
 
-response = requests.get(url, params=params)
+try:
+    response = requests.get(url, params=params, timeout=10)
+except requests.RequestException as error:
+    print("Request to Jisho failed")
+    print(f"Error: {error}")
+    exit()
+
 
 if response.status_code != 200:
     print("Jisho request fail:", response.status_code)
@@ -114,10 +122,10 @@ write_to_dict()
 
 
 for verb in dict_of_data:
-    print("Word:", verb["word"])
-    print("Reading:", verb["reading"])
-    print("Meaning:", verb["meaning"])
-    print("JLPT:", verb["jlpt"])
-    print("Verb Type:", verb["verb_type"])
-    print("Part of Speech:", verb["part_of_speech"])
+    print(f"Word: {verb['word']}")
+    print(f"Reading: {verb['reading']}")
+    print(f"Meaning: {verb['meaning']}")
+    print(f"JLPT Level: {verb['jlpt']}")
+    print(f"Verb Type: {verb['verb_type']}")
+    print(f"Part of Speech: {verb['part_of_speech']}")
     print()
