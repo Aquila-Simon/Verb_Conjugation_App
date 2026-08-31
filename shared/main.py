@@ -1,6 +1,6 @@
 import random
 from verb_conjugation.verb_conjugation import conjugate_て_form
-from csv_loader import load_verbs
+from shared.csv_loader import load_verbs
 
 verbs, skipped_count = load_verbs()
 random.shuffle(verbs)

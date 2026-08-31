@@ -1,7 +1,7 @@
 import csv
 from pathlib import Path
 
-BASE_DIR = Path(__file__).resolve().parent
+BASE_DIR = Path(__file__).resolve().parent.parent
 VERBS_CSV = BASE_DIR / "verb_conjugation" / "verbs.csv"
 
 verbs = []

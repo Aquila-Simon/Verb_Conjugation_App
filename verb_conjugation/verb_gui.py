@@ -2,7 +2,7 @@ import random
 import tkinter as tkin
 from verb_conjugation.verb_conjugation import conjugate_て_form
 from verb_conjugation.verb_conjugation import conjugate_ます_form
-from csv_loader import load_verbs
+from shared.csv_loader import load_verbs
 
 # Creating a Dictionary to simplify tags when used in Functions
 test_state = {
