@@ -1,0 +1,21 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Run Verb GUI",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "verb_conjugation.verb_gui",
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "Run Jisho Scraper",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "data.jisho_scrape",
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal"
+        }
+    ]
+}

@@ -31,8 +31,10 @@ def conjugate_て_form(verb, verb_type):
             return "来て"
         elif verb == "くる":
             return "きて"
+        elif verb.endswith("する"):
+            return verb[:-2] + "して"
         else:
-            raise ValueError(f"Unknown irregular verb: {verb}")
+            raise ValueError(f"Unknown irregular verb ending for {verb}")
 
     if verb_type == "ichidan":
         return conjugate_て_ichidan(verb)
@@ -78,6 +80,10 @@ def conjugate_ます_form(verb, verb_type):
             return "来ます"
         elif verb == "くる":
             return "きます"
+        elif verb.endswith("する"):
+            return verb[:-2] + "します"
+        else:
+            raise ValueError(f"Unknown irregular verb ending for {verb}")
 
     if verb_type == "ichidan":
         return conjugate_ます_ichidan(verb)

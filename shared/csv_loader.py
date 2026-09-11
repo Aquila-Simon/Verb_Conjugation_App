@@ -1,4 +1,8 @@
 import csv
+from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+VERBS_CSV = BASE_DIR / "verb_conjugation" / "verbs.csv"
 
 verbs = []
 skipped_count = 0
@@ -10,7 +14,7 @@ def load_verbs():
     skipped_count = 0
     recorded_verbs = set()
 
-    with open("verbs.csv", encoding="utf-8") as csvfile:
+    with open(VERBS_CSV, encoding="utf-8") as csvfile:
         reader = csv.reader(csvfile)
         next(reader)  # Skip the header row
 

@@ -1,0 +1,146 @@
+[
+    {
+        "word": "仕事する",
+        "reading": "しごとする",
+        "meaning": "work",
+        "jlpt": "jlpt-n5",
+        "verb_type": "irregular",
+        "part_of_speech": "Suru verb"
+    },
+    {
+        "word": "電話する",
+        "reading": "でんわする",
+        "meaning": "telephone call",
+        "jlpt": "jlpt-n5",
+        "verb_type": "irregular",
+        "part_of_speech": "Suru verb"
+    },
+    {
+        "word": "結婚する",
+        "reading": "けっこんする",
+        "meaning": "marriage",
+        "jlpt": "jlpt-n5",
+        "verb_type": "irregular",
+        "part_of_speech": "Suru verb"
+    },
+    {
+        "word": "走る",
+        "reading": "はしる",
+        "meaning": "to run",
+        "jlpt": "jlpt-n5",
+        "verb_type": "godan",
+        "part_of_speech": "Godan verb with 'ru' ending"
+    },
+    {
+        "word": "旅行する",
+        "reading": "りょこうする",
+        "meaning": "travel",
+        "jlpt": "jlpt-n5",
+        "verb_type": "irregular",
+        "part_of_speech": "Suru verb"
+    },
+    {
+        "word": "料理する",
+        "reading": "りょうりする",
+        "meaning": "cooking",
+        "jlpt": "jlpt-n5",
+        "verb_type": "irregular",
+        "part_of_speech": "Suru verb"
+    },
+    {
+        "word": "意味する",
+        "reading": "いみする",
+        "meaning": "meaning",
+        "jlpt": "jlpt-n5",
+        "verb_type": "irregular",
+        "part_of_speech": "Suru verb"
+    },
+    {
+        "word": "散歩する",
+        "reading": "さんぽする",
+        "meaning": "walk",
+        "jlpt": "jlpt-n3",
+        "verb_type": "irregular",
+        "part_of_speech": "Suru verb"
+    },
+    {
+        "word": "帽子する",
+        "reading": "ぼうしする",
+        "meaning": "cap (move)",
+        "jlpt": "jlpt-n5",
+        "verb_type": "irregular",
+        "part_of_speech": "Suru verb"
+    },
+    {
+        "word": "授業する",
+        "reading": "じゅぎょうする",
+        "meaning": "lesson",
+        "jlpt": "jlpt-n5",
+        "verb_type": "irregular",
+        "part_of_speech": "Suru verb"
+    },
+    {
+        "word": "買い物する",
+        "reading": "かいものする",
+        "meaning": "shopping",
+        "jlpt": "jlpt-n5",
+        "verb_type": "irregular",
+        "part_of_speech": "Suru verb"
+    },
+    {
+        "word": "掃除する",
+        "reading": "そうじする",
+        "meaning": "cleaning",
+        "jlpt": "jlpt-n5",
+        "verb_type": "irregular",
+        "part_of_speech": "Suru verb"
+    },
+    {
+        "word": "作文する",
+        "reading": "さくぶんする",
+        "meaning": "writing (an essay, prose, etc.)",
+        "jlpt": "jlpt-n5",
+        "verb_type": "irregular",
+        "part_of_speech": "Suru verb"
+    },
+    {
+        "word": "洗濯する",
+        "reading": "せんたくする",
+        "meaning": "washing",
+        "jlpt": "jlpt-n5",
+        "verb_type": "irregular",
+        "part_of_speech": "Suru verb"
+    },
+    {
+        "word": "飲む",
+        "reading": "のむ",
+        "meaning": "to drink",
+        "jlpt": "jlpt-n5",
+        "verb_type": "godan",
+        "part_of_speech": "Godan verb with 'mu' ending"
+    },
+    {
+        "word": "上げる",
+        "reading": "あげる",
+        "meaning": "to raise",
+        "jlpt": "jlpt-n4",
+        "verb_type": "ichidan",
+        "part_of_speech": "Ichidan verb"
+    },
+    {
+        "word": "成る",
+        "reading": "なる",
+        "meaning": "to become",
+        "jlpt": "jlpt-n3",
+        "verb_type": "godan",
+        "part_of_speech": "Godan verb with 'ru' ending"
+    },
+    {
+        "word": "在る",
+        "reading": "ある",
+        "meaning": "to be",
+        "jlpt": "jlpt-n3",
+        "verb_type": "godan",
+        "part_of_speech": "Godan verb with 'ru' ending (irregular verb)"
+    }
+]
