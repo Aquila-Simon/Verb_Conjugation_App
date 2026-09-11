@@ -42,35 +42,56 @@ def read_from_dict():
 # Checks if data points are empty
 if data["data"]:
     for entry in data["data"]:
-        is_verb = False
         verb_sense = None
         verb_part = None
+        verb_type = None
         for sense in entry["senses"]:
             for part in sense["parts_of_speech"]:
-                if "verb" in part.lower():
-                    is_verb = True
+                if "ichidan" in part.lower():
+                    verb_type = "ichidan"
                     verb_sense = sense
                     verb_part = part
+                elif "godan" in part.lower():
+                    verb_type = "godan"
+                    verb_sense = sense
+                    verb_part = part
+                elif "suru" in part.lower() or "kuru" in part.lower():
+                    verb_type = "irregular"
+                    verb_sense = sense
+                    verb_part = part
+
+                if verb_type is not None:
                     break
-            if is_verb:
+            if verb_type is not None:
                 break
 
         word = "NA"
         reading = "NA"
         meaning = "NA"
         jlpt = "NA"
-        verb_type = "NA"
         part_of_speech = "NA"
 
-        if is_verb:
+        if verb_type is not None:
             if entry["slug"]:
-                word = entry["slug"]
+                if verb_part == "Suru verb":
+                    if entry["slug"].endswith("する"):
+                        word = entry["slug"]
+                    else:
+                        word = entry["slug"] + "する"
+                else:
+                    word = entry["slug"]
             else:
                 word = "Not Available"
 
             if entry["japanese"]:
                 if entry["japanese"][0]["reading"]:
-                    reading = entry["japanese"][0]["reading"]
+                    if verb_part == "Suru verb":
+                        if entry["japanese"][0]["reading"].endswith("する"):
+                            reading = entry["japanese"][0]["reading"]
+                        else:
+                            reading = entry["japanese"][0]["reading"] + "する"
+                    else:
+                        reading = entry["japanese"][0]["reading"]
                 else:
                     reading = "Not Available"
             else:
@@ -87,15 +108,6 @@ if data["data"]:
                 jlpt = entry["jlpt"][0]
             else:
                 jlpt = "Not Available"
-
-            if "ichidan" in verb_part.lower():
-                verb_type = "ichidan"
-            elif "godan" in verb_part.lower():
-                verb_type = "godan"
-            elif "suru" in verb_part.lower() or "kuru" in verb_part.lower():
-                verb_type = "irregular"
-            else:
-                verb_type = "Unknown Verb Type"
 
             verb_data = {
                 "word": word,
