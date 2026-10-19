@@ -1,7 +1,10 @@
 import random
 import tkinter as tkin
-from verb_conjugation.verb_conjugation import conjugate_て_form
-from verb_conjugation.verb_conjugation import conjugate_ます_form
+from verb_conjugation.verb_conjugation import (
+    conjugate_て_form,
+    conjugate_ます_form,
+    conjugate_ない_form,
+)
 from shared.csv_loader import load_verbs
 
 # Creating a Dictionary to simplify tags when used in Functions
@@ -11,21 +14,32 @@ test_state = {
     "skipped_count": 0,
     "mistakes": [],
     "verbs": [],
-    "conjugation_types": ["て", "ます"],
+    "conjugation_types": ["て", "ます", "ない", "dictionary"],
     "conjugation_type": "",
     "verb": "",
     "verb_type": "",
     "correct_answer": "",
+    "displayed_verb": "",
 }
 
 
 def generate_correct_answer():
+    test_state["displayed_verb"] = test_state["verb"]
     if test_state["conjugation_type"] == "て":
         test_state["correct_answer"] = conjugate_て_form(
             test_state["verb"], test_state["verb_type"]
         )
     if test_state["conjugation_type"] == "ます":
         test_state["correct_answer"] = conjugate_ます_form(
+            test_state["verb"], test_state["verb_type"]
+        )
+    if test_state["conjugation_type"] == "ない":
+        test_state["correct_answer"] = conjugate_ない_form(
+            test_state["verb"], test_state["verb_type"]
+        )
+    if test_state["conjugation_type"] == "dictionary":
+        test_state["correct_answer"] = test_state["verb"]
+        test_state["displayed_verb"] = conjugate_ます_form(
             test_state["verb"], test_state["verb_type"]
         )
 
@@ -44,7 +58,7 @@ def check_answer(event=None):  # Function for Receiving the answer and verifying
             font=("Arial", 18, "bold"),
         )
         test_state["mistakes"].append(
-            (test_state["verb"], answer, test_state["correct_answer"])
+            (test_state["displayed_verb"], answer, test_state["correct_answer"])
         )
 
     test_state["current_question"] += 1
@@ -61,7 +75,7 @@ def check_answer(event=None):  # Function for Receiving the answer and verifying
         generate_correct_answer()
         question_label.config(text=f"Question #{test_state['current_question'] + 1}")
         question_bar.config(
-            text=f"What is the {test_state['conjugation_type']}-form of {test_state['verb']}?"
+            text=f"What is the {test_state['conjugation_type']}-form of {test_state['displayed_verb']}?"
         )
         answer_entry.delete(0, tkin.END)
     else:
@@ -75,6 +89,7 @@ def check_answer(event=None):  # Function for Receiving the answer and verifying
 
         # Lists Mistakes for Review on the end of the test
         if test_state["mistakes"]:
+            mistake_text.config(state="normal")
             mistake_text.pack(pady=10)
             mistake_text.config(fg="orange", bg=root.cget("bg"), highlightthickness=0)
             mistake_text.insert("1.0", review_text)
@@ -105,11 +120,12 @@ def restart_test(
     )
     question_label.config(text=f"Question #{test_state['current_question'] + 1}")
     question_bar.config(
-        text=f"What is the {test_state['conjugation_type']}-form of {test_state['verb']}?"
+        text=f"What is the {test_state['conjugation_type']}-form of {test_state['displayed_verb']}?"
     )
     answer_label.config(text="")
     finish_label.config(text="")
     mistake_text.config(state="normal")
+    answer_entry.config(state="normal")
 
     mistake_text.delete("1.0", tkin.END)
     answer_entry.delete(0, tkin.END)
@@ -118,7 +134,6 @@ def restart_test(
     mistake_text.pack_forget()
     restart_bt.pack_forget()
     submit_bt.pack(pady=5)
-    answer_entry.config(state="normal")
 
 
 # Initialize Test upon Boot as far as variables and lists
@@ -153,7 +168,7 @@ question_label.config(text=f"Question #{test_state['current_question'] + 1}")
 # Sets up the Actual Question Display
 question_bar = tkin.Label(
     root,
-    text=f"What is the {test_state['conjugation_type']}-form of {test_state['verb']}?",
+    text=f"What is the {test_state['conjugation_type']}-form of {test_state['displayed_verb']}?",
     font=("Arial", 20, "bold"),
 )
 question_bar.pack(

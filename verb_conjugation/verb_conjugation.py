@@ -93,3 +93,53 @@ def conjugate_ます_form(verb, verb_type):
         return conjugate_ます_irregular(verb)
     else:
         raise ValueError(f"Unknown verb type: {verb_type}")
+
+
+def conjugate_ない_form(verb, verb_type):
+    def conjugate_ない_ichidan(verb):
+        return verb[:-1] + "ない"
+
+    def conjugate_ない_godan(verb):
+        if verb.endswith("う"):
+            return verb[:-1] + "わない"
+        if verb.endswith("つ"):
+            return verb[:-1] + "たない"
+        if verb in ("ある", "有る", "在る"):
+            return "ない"
+        if verb.endswith("る"):
+            return verb[:-1] + "らない"
+        if verb.endswith("む"):
+            return verb[:-1] + "まない"
+        if verb.endswith("ぶ"):
+            return verb[:-1] + "ばない"
+        if verb.endswith("ぬ"):
+            return verb[:-1] + "なない"
+        if verb.endswith("く"):
+            return verb[:-1] + "かない"
+        if verb.endswith("す"):
+            return verb[:-1] + "さない"
+        if verb.endswith("ぐ"):
+            return verb[:-1] + "がない"
+        else:
+            raise ValueError(f"Unknown godan verb ending for {verb}")
+
+    def conjugate_ない_irregular(verb):
+        if verb == "する":
+            return "しない"
+        elif verb == "来る":
+            return "来ない"
+        elif verb == "くる":
+            return "こない"
+        elif verb.endswith("する"):
+            return verb[:-2] + "しない"
+        else:
+            raise ValueError(f"Unknown irregular verb ending for {verb}")
+
+    if verb_type == "ichidan":
+        return conjugate_ない_ichidan(verb)
+    elif verb_type == "godan":
+        return conjugate_ない_godan(verb)
+    elif verb_type == "irregular":
+        return conjugate_ない_irregular(verb)
+    else:
+        raise ValueError(f"Unknown verb type: {verb_type}")
